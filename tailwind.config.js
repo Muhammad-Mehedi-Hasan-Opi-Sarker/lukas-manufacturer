@@ -19,9 +19,9 @@ module.exports = {
 
           "base-100": "#FFFFFF",
 
-          "info": "#3ABFF8",
+          "banner": "#d8d8d8",
 
-          "success": "#36D399",
+          "bannerbtn": "#d8d8d8",
 
           "warning": "#FBBD23",
 
