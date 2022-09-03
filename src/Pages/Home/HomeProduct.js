@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const HomeProduct = () => {
+    const navigate = useNavigate();
+    // get for product 
     const [hProducts, setHproducts] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/homeProduct')
             .then(res => res.json())
             .then(data => setHproducts(data))
     }, [])
+
+    // go to inventory id route 
+    const handleGo = (id) => {
+        navigate(`/homeInventory/${id}`)
+    }
+
     return (
         <div className='mt-16 mb-24'>
             {/* first part */}
@@ -17,21 +26,21 @@ const HomeProduct = () => {
             </div>
 
             {/* second part */}
-            <div className='mb-12 grid lg:grid-cols-5 justify-items-center gap-8 lg:mt-22 mt-16 lg:px-24 px-4'>
+            <div className='mb-12 grid lg:grid-cols-5 md:grid-cols-3 justify-items-center gap-8 lg:mt-22 mt-16 lg:px-24 px-4'>
                 {
-                    hProducts.map(product => <div class="card w-full rounded-none bg-primary shadow-xl">
+                    hProducts.map(product => <div onClick={()=>handleGo(product._id)} class="card w-full rounded-none bg-primary shadow-xl">
                         <figure><img src={product.img} alt="Shoes" /></figure>
                         {/* rating */}
-                       
+
                         <div class="card-body">
                             {/* rating */}
                             <div class="rating rating-sm">
-                            <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
-                            <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" checked />
-                            <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
-                            <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
-                            <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
-                        </div>
+                                <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" checked />
+                                <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
+                            </div>
 
                             <h4 className='font-bold text-xl'>{product.name}</h4>
                             <p><span className='font-bold'>Price:</span> ${product.price}</p>
