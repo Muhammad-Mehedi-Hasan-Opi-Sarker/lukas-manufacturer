@@ -1,0 +1,46 @@
+import React, { useEffect, useState } from 'react';
+
+const HomeProduct = () => {
+    const [hProducts, setHproducts] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/homeProduct')
+            .then(res => res.json())
+            .then(data => setHproducts(data))
+    }, [])
+    return (
+        <div className='mt-16 mb-24'>
+            {/* first part */}
+            <div className='grid justify-items-center'>
+                <h1 className='font-bold text-2xl mb-4 p-2 px-4'>BEST SELLER</h1>
+                <p>All best seller product are now available for you and your can <br />
+                    buy this product from here any time any where so sop now</p>
+            </div>
+
+            {/* second part */}
+            <div className='mb-12 grid lg:grid-cols-5 justify-items-center gap-8 lg:mt-22 mt-16 lg:px-24 px-4'>
+                {
+                    hProducts.map(product => <div class="card w-full rounded-none bg-primary shadow-xl">
+                        <figure><img src={product.img} alt="Shoes" /></figure>
+                        {/* rating */}
+                       
+                        <div class="card-body">
+                            {/* rating */}
+                            <div class="rating rating-sm">
+                            <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
+                            <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" checked />
+                            <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
+                            <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
+                            <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
+                        </div>
+
+                            <h4 className='font-bold text-xl'>{product.name}</h4>
+                            <p><span className='font-bold'>Price:</span> ${product.price}</p>
+                        </div>
+                    </div>)
+                }
+            </div>
+        </div>
+    );
+};
+
+export default HomeProduct;
