@@ -28,18 +28,18 @@ const HomeProduct = () => {
             {/* second part */}
             <div className='mb-12 grid lg:grid-cols-5 md:grid-cols-3 justify-items-center gap-8 lg:mt-22 mt-16 lg:px-24 px-4'>
                 {
-                    hProducts.map(product => <div onClick={()=>handleGo(product._id)} class="card w-full rounded-none bg-primary shadow-xl">
+                    hProducts.map(product => <div onClick={()=>handleGo(product._id)} className="card w-full rounded-none bg-primary shadow-xl">
                         <figure><img src={product.img} alt="Shoes" /></figure>
                         {/* rating */}
 
-                        <div class="card-body">
+                        <div className="card-body">
                             {/* rating */}
-                            <div class="rating rating-sm">
-                                <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
-                                <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" checked />
-                                <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
-                                <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
-                                <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
+                            <div className="rating rating-sm">
+                                <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" checked />
+                                <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
                             </div>
 
                             <h4 className='font-bold text-xl'>{product.name}</h4>
