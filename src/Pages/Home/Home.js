@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../Shared/Footer';
 import AllProducts from './AllProducts';
 import Banner from './Banner/Banner';
 import Car from './Car';
@@ -23,6 +24,7 @@ const Home = () => {
             <Car></Car>
             <Form></Form>
             <Carousel></Carousel>
+            <Footer></Footer>
         </div>
     );
 };
