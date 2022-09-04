@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { BsPlusLg } from 'react-icons/bs';
+import Footer from './Footer';
 
 const Inventory = () => {
-    const {id}=useParams();
-    const [product,setProduct]=useState([])
-    useEffect(()=>{
+    const { id } = useParams();
+    const [product, setProduct] = useState([])
+    useEffect(() => {
         fetch(`http://localhost:5000/product/${id}`)
-        .then(res=>res.json()).then(data=>setProduct(data))
-    },[])
-    
+            .then(res => res.json()).then(data => setProduct(data))
+    }, [])
+
     const [counter, setCounter] = useState(0);
     const incrementCounter = () => setCounter(counter + 1);
     let deccrementCounter = () => setCounter(counter - 1);
@@ -80,8 +81,8 @@ const Inventory = () => {
                 {/* card 1 */}
                 <div class="card w-full border rounded-none grid justify-items-center bg-primary">
                     <div className='lg:flex'>
-                    <h2 class="des bg-secondary mt-0 font-bold text-xl text-base-100 p-3">DESCRIPTION</h2>
-                    <h2 class="des bg-neutral mt-0 font-bold text-xl text-base-100 p-3">REVIEW</h2>
+                        <h2 class="des bg-secondary mt-0 font-bold text-xl text-base-100 p-3">DESCRIPTION</h2>
+                        <h2 class="des bg-neutral mt-0 font-bold text-xl text-base-100 p-3">REVIEW</h2>
                     </div>
                     <div class="card-body">
                         <p>Created from either wood or recycled materials, it can be
@@ -101,9 +102,9 @@ const Inventory = () => {
                     </div>
                 </div>
 
-        
-            </div>
 
+            </div>
+            <Footer></Footer>
         </div>
     );
 };

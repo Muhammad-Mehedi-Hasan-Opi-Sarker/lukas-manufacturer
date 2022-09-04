@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './HomeInventory.css';
 import { useParams } from 'react-router-dom';
 import { BsPlusLg } from 'react-icons/bs';
+import Footer from '../Shared/Footer';
 
 const HomeInventory = () => {
     const { id } = useParams();
@@ -82,8 +83,8 @@ const HomeInventory = () => {
                 {/* card 1 */}
                 <div class="card w-full border rounded-none grid justify-items-center bg-primary">
                     <div className='lg:flex'>
-                    <h2 class="des bg-secondary mt-0 font-bold text-xl text-base-100 p-3">DESCRIPTION</h2>
-                    <h2 class="des bg-neutral mt-0 font-bold text-xl text-base-100 p-3">REVIEW</h2>
+                        <h2 class="des bg-secondary mt-0 font-bold text-xl text-base-100 p-3">DESCRIPTION</h2>
+                        <h2 class="des bg-neutral mt-0 font-bold text-xl text-base-100 p-3">REVIEW</h2>
                     </div>
                     <div class="card-body">
                         <p>Created from either wood or recycled materials, it can be
@@ -103,9 +104,9 @@ const HomeInventory = () => {
                     </div>
                 </div>
 
-        
-            </div>
 
+            </div>
+            <Footer></Footer>
         </div>
     );
 };

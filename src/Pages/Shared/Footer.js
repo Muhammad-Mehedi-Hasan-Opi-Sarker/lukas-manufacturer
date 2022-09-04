@@ -11,7 +11,7 @@ const Footer = () => {
                    <p>do you need you can get here soluta nobis</p>
                 </div>
                 <div className='lg:mt-16 mt-8 lg:mb-16'>
-                    <span className="footer-title text-xl">Information</span>
+                    <span className="footer-title text-xl border-b-2">Information</span>
                     <a className="link link-hover">Our company</a>
                     <a className="link link-hover">Contact us</a>
                     <a className="link link-hover">Our services</a>
@@ -19,7 +19,7 @@ const Footer = () => {
                     <a className="link link-hover">Careers</a>
                 </div>
                 <div className='lg:mt-16 mt-8 lg:mb-16'>
-                    <span className="footer-title text-xl">Quicklink</span>
+                    <span className="footer-title text-xl border-b-2">Quicklink</span>
                     <a className="link link-hover">About</a>
                     <a className="link link-hover">Blog</a>
                     <a className="link link-hover">Shop</a>
@@ -27,7 +27,7 @@ const Footer = () => {
                     <a className="link link-hover">Contact</a>
                 </div>
                 <div className='lg:mt-16 mt-8 lg:mb-16'>
-                    <span className="footer-title text-xl">Support</span>
+                    <span className="footer-title text-xl border-b-2">Support</span>
                     <a className="link link-hover">Blog</a>
                     <a className="link link-hover">Contact</a>
                     <a className="link link-hover">Return Policy</a>
@@ -35,7 +35,7 @@ const Footer = () => {
                     <a className="link link-hover">Money Back</a>
                 </div>
                 <div className='lg:mt-16 mt-8 lg:mb-16'>
-                    <span className="footer-title text-xl">Store Information</span>
+                    <span className="footer-title text-xl border-b-2">Store Information</span>
                     <a className="link link-hover">2005 Stokes Isle Apartment. 896,</a>
                     <a className="link link-hover">Washington 10010, USA</a>
                     <a className="link link-hover">https://opimehedi.netlify.com</a>
