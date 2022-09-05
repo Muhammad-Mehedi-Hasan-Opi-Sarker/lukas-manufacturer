@@ -1,8 +1,53 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../Shared/Footer';
+import { useCreateUserWithEmailAndPassword, useUpdateEmail, useUpdateProfile } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+import Loading from '../Shared/Loading';
+
 
 const SignUp = () => {
+    const navigate = useNavigate();
+
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
+
+    // get user name for 
+    const [updateProfile, updating, errorU] = useUpdateProfile(auth);
+
+    // error
+    let erroElement;
+    if (error || errorU) {
+        erroElement = <p className='text-red-500'>{error?.message} || {errorU?.message} </p>
+    }
+
+    //   loading 
+    if (loading || updating) {
+        return <Loading></Loading>;
+    }
+
+    //   user 
+    if (user) {
+        console.log(user)
+        navigate('/home')
+    }
+
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+        // console.log('resule',e);
+        const name = e.target.name.value;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        console.log(name, email, password)
+        await createUserWithEmailAndPassword(email, password)
+        await updateProfile({ displayName: name });
+        // console.log({name});
+    }
+
     return (
         <div className=''>
             <div>
@@ -16,11 +61,12 @@ const SignUp = () => {
                 </div>
                 {/* card 2 */}
                 <div className="card w-full bg-base-100 lg:px-96 gird justify-items-center">
-                    <form>
+                    <form onSubmit={handleSignUp}>
                         <div className="card-body border shadow">
-                            <input type="text" placeholder="User Name" className="input input-bordered w-full mb-3 lg:mt-12 mt-5" />
-                            <input type="text" placeholder="Email" className="input input-bordered w-full mb-5" />
-                            <input type="password" placeholder="Password" className="input input-bordered w-full mb-5" />
+                            <input name='name' type="name" placeholder="User Name" className="input input-bordered w-full mb-3 lg:mt-12 mt-5" />
+                            <input name='email' type="email" placeholder="Email" className="input input-bordered w-full mb-5" />
+                            <input name='password' type="password" placeholder="Password" className="input input-bordered w-full mb-5" />
+                            {erroElement}
                             <input className='btn btn-neutral w-full' type="submit" value="LOGIN" />
                             <p>Have Account? <span className='mb-5 text-secondary'><Link to='/signin'>Login Please</Link></span></p>
                             <p className='lg:mb-12'></p>
