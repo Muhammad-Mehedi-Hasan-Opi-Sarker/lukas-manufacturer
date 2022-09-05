@@ -8,6 +8,7 @@ import Inventory from './Pages/Shared/Inventory';
 import About from './Pages/About/About';
 import SignIn from './Pages/SignLog/SignIn';
 import NotFound from './Pages/Shared/NotFound';
+import SignUp from './Pages/SignLog/SignUp';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/about' element={<About></About>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
         <Route path='/signin' element={<SignIn></SignIn>}></Route>
+        <Route path='/signup' element={<SignUp></SignUp>}></Route>
       </Routes>
     </div>
   );
