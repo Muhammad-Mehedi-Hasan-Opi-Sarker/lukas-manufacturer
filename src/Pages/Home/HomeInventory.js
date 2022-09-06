@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './HomeInventory.css';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { BsPlusLg } from 'react-icons/bs';
 import Footer from '../Shared/Footer';
+import auth from '../../firebase.init';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const HomeInventory = () => {
+    const [user, loading, error] = useAuthState(auth);
     const { id } = useParams();
     const [product, setProduct] = useState([]);
     useEffect(() => {
@@ -12,6 +15,7 @@ const HomeInventory = () => {
             .then(res => res.json()).then(data => setProduct(data))
     }, [])
 
+    // increase decrease button 
     const [counter, setCounter] = useState(0);
     const incrementCounter = () => setCounter(counter + 1);
     let deccrementCounter = () => setCounter(counter - 1);
@@ -19,6 +23,34 @@ const HomeInventory = () => {
         deccrementCounter = () => setCounter(1);
     }
 
+    // add to cart 
+    const addToCart = event => {
+        event.preventDefault();
+        const count = event.target.count.value;
+        const data = {
+            name:product.name,
+            pices:count, 
+            email:user.email
+        };
+        fetch(`http://localhost:5000/order/${id}`, {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+               
+                
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                
+            });
+
+    }
 
     return (
         <div>
@@ -27,13 +59,17 @@ const HomeInventory = () => {
             grid justify-items-center items-center
             bg-[url('https://htmldemo.net/lukas/lukas/assets/img/bg/page-header-bg.jpg')]">
                     <h1 className='font-bold text-4xl'>Product Details</h1>
-                    <h1 className='font-bold text-xl'><span>Home</span> <span>Shop</span> <span className='text-secondary'>Product Details</span></h1>
+                    <h1 className='font-bold text-xl'>
+                        <Link to='/home'><span>Home</span></Link>
+                        <Link to='/shop'><span> Shop</span> </Link>
+                        <span className='text-secondary'>Product Details</span>
+                    </h1>
                 </div>
 
                 {/* card */}
-                <div class="card lg:card-side bg-base-100 lg:mt-28 mt-12 lg:px-24 px-4">
+                <div class="card lg:card-side bg-base-100 lg:mt-28 mt-12 lg:px-24 px-4 gap-3">
                     <figure className='card border rounded-none imgOut'><img src={product.img} className='imag' alt="Album" /></figure>
-                    <div class="card-body">
+                    <div class="card-body border">
                         <h1 className='font-bold lg:text-4xl text-2xl'>{product.name}</h1>
                         <p> <span className='font-bold text-xl'>Price:</span> <span className='font-bold'> ${product.price}</span></p>
                         <p className='mb-8'>Pursue pleasure rationally encounter consequences that are extremely painful. Nor <br />
@@ -63,23 +99,27 @@ const HomeInventory = () => {
                                 </tbody>
                             </table>
                         </div>
-
                         {/* add to cart buttton */}
-                        <div>
+
+                        <form onSubmit={addToCart}>
                             <div className='flex' style={{ marginRight: '530px' }}>
-                                <button onClick={incrementCounter} className='btn rounded-none mr-5 border-primary text-neutral' style={{ backgroundColor: 'white' }}><BsPlusLg></BsPlusLg></button>
-                                <p className='mt-3 lg:mr-5 mr-5 font-bold'>{counter}</p>
-                                <button onClick={deccrementCounter} className='btn rounded-none text-4xl border-primary text-neutral' style={{ backgroundColor: 'white' }}>-</button>
-                                <button className='ml-5 btn rounded-none font-bold border-primary text-neutral' style={{ backgroundColor: 'white' }}>Add to Cart</button>
+                                <p onClick={incrementCounter} className='btn rounded-none mr-5 border-primary text-neutral' style={{ backgroundColor: 'white' }}><BsPlusLg></BsPlusLg></p>
+                                {/* <p >{counter}</p> */}
+
+                                <button disabled name='count' className='mt-3 lg:mr-5 mr-5 font-bold w-12' value={counter} id="" >{counter}</button>
+
+                                <p onClick={deccrementCounter} className='btn rounded-none text-4xl border-primary text-neutral' style={{ backgroundColor: 'white' }}>-</p>
+                                <button type='submit' className='ml-5 btn rounded-none font-bold border-primary text-neutral' style={{ backgroundColor: 'white' }}>Add to Cart</button>
                             </div>
-                        </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
 
             {/* description and reviews setion  */}
 
-            <div className='flex lg:px-24 px-4'>
+            <div className='flex lg:px-24 px-4 mt-8'>
                 {/* card 1 */}
                 <div class="card w-full border rounded-none grid justify-items-center bg-primary">
                     <div className='lg:flex'>

@@ -10,6 +10,11 @@ import SignIn from './Pages/SignLog/SignIn';
 import NotFound from './Pages/Shared/NotFound';
 import SignUp from './Pages/SignLog/SignUp';
 import Shop from './Pages/Shop/Shop';
+import RequiredAuth from './Pages/RequiredAuth';
+import Dhashboard from './Pages/Dashboard/Dhashboard';
+import MyOrders from './Pages/Dashboard/MyOrders';
+import Reviews from './Pages/Dashboard/Reviews';
+import Profile from './Pages/Dashboard/Profile';
 
 function App() {
   return (
@@ -21,7 +26,21 @@ function App() {
         <Route path='/homeInventory/:id' element={<HomeInventory></HomeInventory>}></Route>
         <Route path='/inventory/:id' element={<Inventory></Inventory>}></Route>
         <Route path='/about' element={<About></About>}></Route>
-        <Route path='/shop' element={<Shop></Shop>}></Route>
+        <Route path='/shop' element={
+          <RequiredAuth>
+            <Shop></Shop>
+          </RequiredAuth>
+        }></Route>
+        <Route path='/dashboard' element={
+          <RequiredAuth>
+            <Dhashboard></Dhashboard>
+          </RequiredAuth>
+        }>
+          <Route index element={<Profile></Profile>}></Route>
+          {/* <Route path='profile' element={<Profile></Profile>}></Route> */}
+          <Route path='order' element={<MyOrders></MyOrders>}></Route>
+          <Route path='review' element={<Reviews></Reviews>}></Route>
+        </Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
         <Route path='/signin' element={<SignIn></SignIn>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>

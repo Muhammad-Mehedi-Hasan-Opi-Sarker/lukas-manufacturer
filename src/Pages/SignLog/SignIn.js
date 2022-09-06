@@ -1,18 +1,26 @@
 import React from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Footer from '../Shared/Footer';
 import Loading from '../Shared/Loading';
+import SocialLog from './SocialLog';
 
 const SignIn = () => {
-    const navigate = useNavigate();
+    let navigate = useNavigate();
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+
+    // email and password 
     const [
         signInWithEmailAndPassword,
         user,
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+
+    // google authentication 
+    const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
 
     const handleSignIn = e => {
         e.preventDefault();
@@ -23,18 +31,18 @@ const SignIn = () => {
 
     // error
     let erroElement;
-    if (error) {
-        erroElement = <p className='text-red-500'>{error.message}</p>
+    if (error || gerror) {
+        erroElement = <p className='text-red-500'>{error?.message} || {gerror?.message}</p>
     }
 
     //   loading 
-    if (loading) {
+    if (loading || gloading) {
         return <Loading></Loading>;
     }
 
     //   user 
-    if (user) {
-        navigate('/home')
+    if (user || guser) {
+        navigate(from, { replace: true });
     }
 
     return (
@@ -45,7 +53,9 @@ const SignIn = () => {
             grid justify-items-center items-center
             bg-[url('https://htmldemo.net/lukas/lukas/assets/img/bg/page-header-bg.jpg')]">
                         <div><h1 className='font-bold text-4xl mb-1'>Login</h1>
-                            <h1 className='font-bold text-xl'><span>Home</span> <span className='text-secondary'> Login</span></h1></div>
+                            <h1 className='font-bold text-xl'>
+                                <Link to='/home'><span>Home</span></Link>
+                                <span className='text-secondary'> Login</span></h1></div>
                     </div>
                 </div>
                 {/* card 2 */}
@@ -57,6 +67,7 @@ const SignIn = () => {
                             {erroElement}
                             <input className='btn btn-neutral w-full' type="submit" value="LOGIN" />
                             <p>No Account <span className='mb-5 text-secondary'><Link to='/signup'>Register Please</Link></span></p>
+                            <input onClick={() => signInWithGoogle()} className='btn btn-neutral w-full' type="submit" value="Sign In With Google" />
                             <p className='lg:mb-12'></p>
                         </div>
                     </form>

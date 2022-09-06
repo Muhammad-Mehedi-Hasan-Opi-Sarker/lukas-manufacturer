@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { BsPlusLg } from 'react-icons/bs';
 import Footer from './Footer';
 
@@ -25,7 +25,11 @@ const Inventory = () => {
             grid justify-items-center items-center
             bg-[url('https://htmldemo.net/lukas/lukas/assets/img/bg/page-header-bg.jpg')]">
                     <h1 className='font-bold text-4xl'>Product Details</h1>
-                    <h1 className='font-bold text-xl'><span>Home</span> <span>Shop</span> <span className='text-secondary'>Product Details</span></h1>
+                    <h1 className='font-bold text-xl'>
+                        <Link to='/home'><span>Home</span></Link>
+                          <Link to='/shop'><span> Shop</span> </Link>
+                         <span className='text-secondary'>Product Details</span>
+                         </h1>
                 </div>
 
                 {/* card */}

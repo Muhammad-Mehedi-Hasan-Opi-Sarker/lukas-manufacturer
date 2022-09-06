@@ -1,14 +1,18 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '../Shared/Footer';
-import { useCreateUserWithEmailAndPassword, useUpdateEmail, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateEmail, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading';
-
+import SocialLog from './SocialLog';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
-    const navigate = useNavigate();
+    let navigate = useNavigate();
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
 
+    // email and password 
     const [
         createUserWithEmailAndPassword,
         user,
@@ -16,24 +20,30 @@ const SignUp = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
 
+    // google authentication 
+    const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+
     // get user name for 
     const [updateProfile, updating, errorU] = useUpdateProfile(auth);
 
+    // user get 
+    // const [token] = useToken(user || guser)
+
     // error
     let erroElement;
-    if (error || errorU) {
-        erroElement = <p className='text-red-500'>{error?.message} || {errorU?.message} </p>
+    if (error || errorU || gerror) {
+        erroElement = <p className='text-red-500'>{error?.message} || {errorU?.message} |{gerror?.message}|  </p>
     }
 
     //   loading 
-    if (loading || updating) {
+    if (loading || updating || gloading) {
         return <Loading></Loading>;
     }
 
     //   user 
-    if (user) {
-        console.log(user)
-        navigate('/home')
+    if (user || guser) {
+        console.log(user || guser);
+        // navigate(from, { replace: true });
     }
 
     const handleSignUp = async (e) => {
@@ -42,7 +52,6 @@ const SignUp = () => {
         const name = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(name, email, password)
         await createUserWithEmailAndPassword(email, password)
         await updateProfile({ displayName: name });
         // console.log({name});
@@ -56,7 +65,9 @@ const SignUp = () => {
             grid justify-items-center items-center
             bg-[url('https://htmldemo.net/lukas/lukas/assets/img/bg/page-header-bg.jpg')]">
                         <div><h1 className='font-bold text-4xl'>Register</h1>
-                            <h1 className='font-bold text-xl'><span>Home</span> <span className='text-secondary'> SignIn</span></h1></div>
+                            <h1 className='font-bold text-xl'>
+                                <Link to='/home'><span>Home</span></Link>
+                                <span className='text-secondary'> SignIn</span></h1></div>
                     </div>
                 </div>
                 {/* card 2 */}
@@ -69,6 +80,7 @@ const SignUp = () => {
                             {erroElement}
                             <input className='btn btn-neutral w-full' type="submit" value="LOGIN" />
                             <p>Have Account? <span className='mb-5 text-secondary'><Link to='/signin'>Login Please</Link></span></p>
+                            <input onClick={() => signInWithGoogle()} className='btn btn-neutral w-full' type="submit" value="Sign In With Google" />
                             <p className='lg:mb-12'></p>
                         </div>
                     </form>
