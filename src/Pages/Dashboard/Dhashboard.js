@@ -1,29 +1,37 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import Footer from '../Shared/Footer';
+import { ImProfile } from 'react-icons/im';
+import { FaListAlt } from 'react-icons/fa';
+import { HiOutlineViewList } from 'react-icons/hi';
+import { MdBookmarkBorder, MdPreview } from 'react-icons/md';
 
 const Dhashboard = () => {
     return (
-        <div>
-            <div className="drawer drawer-mobile">
-                <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col">
-                    {/* <!-- Page content here --> */}
-                    {/* <h1 className="font-bold text-4xl">Main page</h1> */}
-                    <Outlet></Outlet>
-                    
-                </div>
-                <div className="drawer-side">
-                    <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                    <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
-                        {/* <!-- Sidebar content here --> */}
-                        <li><Link to='/dashboard'>My Profile</Link></li>
-                        <li><Link to='/dashboard/review'>Review</Link></li>
-                        <li><Link to='/dashboard/order'>All Order List</Link></li>
-                        <li><Link to='/dashboard/order'>Reviews</Link></li>
-                        <li><Link to='/dashboard/order'>Admin Role</Link></li>
-                    </ul>
+        <div className='bg-'>
+            <div className=''>
+                <div className="drawer drawer-mobile">
+                    <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+                    <div className="drawer-content flex flex-col">
+                        {/* <!-- Page content here --> */}
+                        {/* <h1 className="font-bold text-4xl">Main page</h1> */}
+                        <Outlet></Outlet>
+
+                    </div>
+                    <div className="drawer-side">
+                        <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+                        <ul className="menu p-4 overflow-y-auto w-56  text-nutral bg-primary">
+                            {/* <!-- Sidebar content here --> */}
+                            <li><Link to='/dashboard'><ImProfile></ImProfile>My Profile</Link></li>
+                            <li><Link to='/dashboard/order'><span className='text-xl'><MdBookmarkBorder></MdBookmarkBorder></span> Orders</Link></li>
+                            <li><Link to='/dashboard/review'><span className='text-xl'><MdPreview></MdPreview></span> Review</Link></li>
+                            <li><Link to='/dashboard/allOrder'><span><FaListAlt></FaListAlt></span> All Order List</Link></li>
+                            <li><Link to='/dashboard/order'><span className='text-xl'><HiOutlineViewList></HiOutlineViewList></span> Admin Role</Link></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 };

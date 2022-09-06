@@ -15,6 +15,9 @@ import Dhashboard from './Pages/Dashboard/Dhashboard';
 import MyOrders from './Pages/Dashboard/MyOrders';
 import Reviews from './Pages/Dashboard/Reviews';
 import Profile from './Pages/Dashboard/Profile';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import AllOrders from './Pages/Dashboard/AllOrders';
 
 function App() {
   return (
@@ -40,11 +43,13 @@ function App() {
           {/* <Route path='profile' element={<Profile></Profile>}></Route> */}
           <Route path='order' element={<MyOrders></MyOrders>}></Route>
           <Route path='review' element={<Reviews></Reviews>}></Route>
+          <Route path='allOrder' element={<AllOrders></AllOrders>}></Route>
         </Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
         <Route path='/signin' element={<SignIn></SignIn>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

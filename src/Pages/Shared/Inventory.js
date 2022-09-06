@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { BsPlusLg } from 'react-icons/bs';
 import Footer from './Footer';
+import auth from '../../firebase.init';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
 
 const Inventory = () => {
     const { id } = useParams();
+    const [user, loading, error] = useAuthState(auth);
     const [product, setProduct] = useState([])
     useEffect(() => {
         fetch(`http://localhost:5000/product/${id}`)
@@ -18,6 +22,40 @@ const Inventory = () => {
         deccrementCounter = () => setCounter(1);
     }
 
+    // add to cart 
+    const addToCart = event => {
+        event.preventDefault();
+        const count = event.target.count.value;
+        let today = new Date();
+        let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        const data = {
+            name: product.name,
+            count: count,
+            email: user.email,
+            img: product.img,
+            date: date
+        };
+        console.log(data)
+        fetch(`http://localhost:5000/order/${id}`, {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                toast('order confirm')
+
+
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+
+            });
+
+    }
+
     return (
         <div>
             <div>
@@ -27,9 +65,9 @@ const Inventory = () => {
                     <h1 className='font-bold text-4xl'>Product Details</h1>
                     <h1 className='font-bold text-xl'>
                         <Link to='/home'><span>Home</span></Link>
-                          <Link to='/shop'><span> Shop</span> </Link>
-                         <span className='text-secondary'>Product Details</span>
-                         </h1>
+                        <Link to='/shop'><span> Shop</span> </Link>
+                        <span className='text-secondary'>Product Details</span>
+                    </h1>
                 </div>
 
                 {/* card */}
@@ -67,14 +105,19 @@ const Inventory = () => {
                         </div>
 
                         {/* add to cart buttton */}
-                        <div>
+
+                        <form onSubmit={addToCart}>
                             <div className='flex' style={{ marginRight: '530px' }}>
-                                <button onClick={incrementCounter} className='btn rounded-none mr-5 border-primary text-neutral' style={{ backgroundColor: 'white' }}><BsPlusLg></BsPlusLg></button>
-                                <p className='mt-3 lg:mr-5 mr-5 font-bold'>{counter}</p>
-                                <button onClick={deccrementCounter} className='btn rounded-none text-4xl border-primary text-neutral' style={{ backgroundColor: 'white' }}>-</button>
-                                <button className='ml-5 btn rounded-none font-bold border-primary text-neutral' style={{ backgroundColor: 'white' }}>Add to Cart</button>
+                                <p onClick={incrementCounter} className='btn rounded-none mr-5 border-primary text-neutral' style={{ backgroundColor: 'white' }}><BsPlusLg></BsPlusLg></p>
+                                {/* <p >{counter}</p> */}
+
+                                <button disabled name='count' className='mt-3 lg:mr-5 mr-5 font-bold w-12' value={counter} id="" >{counter}</button>
+
+                                <p onClick={deccrementCounter} className='btn rounded-none text-4xl border-primary text-neutral' style={{ backgroundColor: 'white' }}>-</p>
+                                <button type='submit' className='ml-5 btn rounded-none font-bold border-primary text-neutral' style={{ backgroundColor: 'white' }}>Add to Cart</button>
                             </div>
-                        </div>
+                        </form>
+
                     </div>
                 </div>
             </div>

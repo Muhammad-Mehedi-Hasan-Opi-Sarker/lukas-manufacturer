@@ -5,6 +5,7 @@ import { BsPlusLg } from 'react-icons/bs';
 import Footer from '../Shared/Footer';
 import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
 
 const HomeInventory = () => {
     const [user, loading, error] = useAuthState(auth);
@@ -27,11 +28,16 @@ const HomeInventory = () => {
     const addToCart = event => {
         event.preventDefault();
         const count = event.target.count.value;
+        var today = new Date();
+        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         const data = {
-            name:product.name,
-            pices:count, 
-            email:user.email
+            name: product.name,
+            count: count,
+            email: user.email,
+            img: product.img,
+            date: date
         };
+        console.log(data)
         fetch(`http://localhost:5000/order/${id}`, {
             method: 'POST', // or 'PUT'
             headers: {
@@ -41,13 +47,13 @@ const HomeInventory = () => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
-               
-                
+                toast('order confirm')
+
+
             })
             .catch((error) => {
                 console.error('Error:', error);
-                
+
             });
 
     }
