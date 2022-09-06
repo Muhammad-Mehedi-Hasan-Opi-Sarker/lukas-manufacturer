@@ -4,10 +4,25 @@ import { AiFillDelete } from 'react-icons/ai';
 
 const AllOrders = () => {
     const [orders, setOrders] = useState([]);
+    const [reload, setReload]=useState(false);
     useEffect(() => {
         fetch('http://localhost:5000/order')
             .then(res => res.json()).then(data => setOrders(data));
-    }, [])
+    }, [reload])
+    // delete 
+    const handleDelete = id => {
+        const procced = window.confirm('Confirm Now');
+        if (procced) {
+            const url = `http://localhost:5000/order/${id}`;
+            fetch(url, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setReload(!reload)
+                })
+        }
+    }
     return (
         <div>
             <div className="overflow-x-auto w-full rounded-none">
@@ -48,7 +63,7 @@ const AllOrders = () => {
                                     <button className="">{order.date}</button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-ghost btn-xs text-2xl"><AiFillDelete></AiFillDelete></button>
+                                    <button onClick={() => handleDelete(order._id)} className="btn btn-ghost btn-xs text-2xl"><AiFillDelete></AiFillDelete></button>
                                 </td>
                             </tr>)
                         }
