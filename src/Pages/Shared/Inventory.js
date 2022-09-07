@@ -46,8 +46,6 @@ const Inventory = () => {
             .then(response => response.json())
             .then(data => {
                 toast('order confirm')
-
-
             })
             .catch((error) => {
                 console.error('Error:', error);

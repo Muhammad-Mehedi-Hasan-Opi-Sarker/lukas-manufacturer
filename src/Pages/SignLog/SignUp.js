@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '../Shared/Footer';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateEmail, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateEmail, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading';
-import SocialLog from './SocialLog';
 import useToken from '../../hooks/useToken';
 
+
+
 const SignUp = () => {
+    const [user ,userLoading] = useAuthState(auth);
     let navigate = useNavigate();
     let location = useLocation();
     let from = location.state?.from?.pathname || "/";
@@ -15,7 +17,7 @@ const SignUp = () => {
     // email and password 
     const [
         createUserWithEmailAndPassword,
-        user,
+        createUser,
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
@@ -27,7 +29,7 @@ const SignUp = () => {
     const [updateProfile, updating, errorU] = useUpdateProfile(auth);
 
     // user get 
-    // const [token] = useToken(user || guser)
+    const [token] = useToken( user || guser )
 
     // error
     let erroElement;
@@ -36,14 +38,14 @@ const SignUp = () => {
     }
 
     //   loading 
-    if (loading || updating || gloading) {
+    if (loading || updating || gloading || userLoading) {
         return <Loading></Loading>;
     }
 
     //   user 
     if (user || guser) {
-        console.log(user || guser);
-        // navigate(from, { replace: true });
+        // console.log(user || guser);
+        navigate(from, { replace: true });
     }
 
     const handleSignUp = async (e) => {

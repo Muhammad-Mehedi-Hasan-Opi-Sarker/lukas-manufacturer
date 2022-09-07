@@ -3,13 +3,16 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
+import Loading from '../Shared/Loading';
 
 const Headers = () => {
     const [user, loading, error] = useAuthState(auth);
     const logout = () => {
         signOut(auth);
     };
-
+    if(loading){
+        return <Loading></Loading>;
+    }
     const nav = <>
         <li><Link to='/home' >Home</Link></li>
         <li><Link to='/about' >About</Link></li>
@@ -38,7 +41,7 @@ const Headers = () => {
                 </div>
                 <div className="navbar-end">
                     <ul className='text-xl'>
-                        <li>{user ? <p onClick={logout} className='font-xl'>{user.displayName[0]}</p> : <Link to='/signin' >Login</Link>}</li>
+                        <li>{user ? <p onClick={logout} className='font-xl'>{user?.displayName}</p> : <Link to='/signin' >Login</Link>}</li>
                     </ul>
                 </div>
                 <div className='navbar-end'>
