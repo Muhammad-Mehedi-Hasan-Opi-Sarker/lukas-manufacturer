@@ -6,8 +6,13 @@ import { FaListAlt } from 'react-icons/fa';
 import { HiOutlineViewList } from 'react-icons/hi';
 import { AiOutlineUsergroupAdd } from 'react-icons/ai';
 import { MdBookmarkBorder, MdPreview } from 'react-icons/md';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import useAdmin from '../../hooks/useAdmin';
+import auth from '../../firebase.init';
 
 const Dhashboard = () => {
+    const [user] = useAuthState(auth);
+    const [admin] = useAdmin(user);
     return (
         <div className='bg-'>
             <div className=''>
@@ -26,7 +31,7 @@ const Dhashboard = () => {
                             <li><Link to='/dashboard'><ImProfile></ImProfile>My Profile</Link></li>
                             <li><Link to='/dashboard/order'><span className='text-xl'><MdBookmarkBorder></MdBookmarkBorder></span> Orders</Link></li>
                             <li><Link to='/dashboard/review'><span className='text-xl'><MdPreview></MdPreview></span> Review</Link></li>
-                            <li><Link to='/dashboard/users'><span><AiOutlineUsergroupAdd></AiOutlineUsergroupAdd></span> All Users List</Link></li>
+                            {admin && <li><Link to='/dashboard/users'><span><AiOutlineUsergroupAdd></AiOutlineUsergroupAdd></span> All Users List</Link></li>}
                             <li><Link to='/dashboard/allOrder'><span><FaListAlt></FaListAlt></span> All Order List</Link></li>
                             <li><Link to='/dashboard/order'><span className='text-xl'><HiOutlineViewList></HiOutlineViewList></span> Admin Role</Link></li>
                         </ul>

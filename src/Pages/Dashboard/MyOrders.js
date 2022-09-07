@@ -2,7 +2,7 @@ import { linkWithCredential, signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { AiFillDelete } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const MyOrders = () => {
@@ -92,7 +92,8 @@ const MyOrders = () => {
                                     <button onClick={() => handleDelete(order._id)} className="btn btn-ghost btn-xs text-2xl"><AiFillDelete></AiFillDelete></button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-ghost btn-xs">Confrim</button>
+                                    {(order.count && !order.paid) && <Link to={``}><button className="btn btn-ghost bg-primary btn-xs">pay</button></Link>}
+                                    {(order.count && !order.paid) && <Link to={``}><button className="btn btn-ghost bg-primary btn-xs">paid</button></Link>}
                                 </td>
                             </tr>)
                         }
