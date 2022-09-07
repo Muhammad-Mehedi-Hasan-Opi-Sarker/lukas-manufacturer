@@ -1,21 +1,39 @@
-import { linkWithCredential } from 'firebase/auth';
+import { linkWithCredential, signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { AiFillDelete } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const MyOrders = () => {
     const [user, loading, error] = useAuthState(auth);
-    const [reload, setReload]=useState(false);
-    const [orders,setOrders]=useState([]);
-    useEffect(()=>{
-        fetch(`http://localhost:5000/order?email=${user.email}`)
-        .then(res=>res.json())
-        .then(data=>setOrders(data))
-    },[reload])
+    const navigate = useNavigate();
+    const [reload, setReload] = useState(false);
+    const [orders, setOrders] = useState([]);
+    useEffect(() => {
+        fetch(`http://localhost:5000/order?email=${user.email}`, {
+            method: 'GET',
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => {
+                console.log('res',res);
+                if(res.status === 401 || res.status === 403){
+                    signOut(auth);
+                    localStorage.removeItem('accessToken');
+                    navigate('/')
+                }
+                return res.json()
+                
+            })
+            .then(data => {
+                setOrders(data)
+            })
+    }, [reload])
 
-     // delete 
-     const handleDelete = id => {
+    // delete 
+    const handleDelete = id => {
         console.log(id)
         const procced = window.confirm('Confirm Now');
         if (procced) {
@@ -32,7 +50,7 @@ const MyOrders = () => {
 
     return (
         <div>
-             <div className="overflow-x-auto w-full rounded-none">
+            <div className="overflow-x-auto w-full rounded-none">
                 <table className="table w-full">
                     {/* <!-- head --> */}
                     <thead>
@@ -42,6 +60,7 @@ const MyOrders = () => {
                             <th>piece</th>
                             <th>Entry Date</th>
                             <th></th>
+                            <th>Order Now</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,6 +90,9 @@ const MyOrders = () => {
                                 </td>
                                 <td>
                                     <button onClick={() => handleDelete(order._id)} className="btn btn-ghost btn-xs text-2xl"><AiFillDelete></AiFillDelete></button>
+                                </td>
+                                <td>
+                                    <button className="btn btn-ghost btn-xs">Confrim</button>
                                 </td>
                             </tr>)
                         }

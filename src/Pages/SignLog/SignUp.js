@@ -29,7 +29,7 @@ const SignUp = () => {
     const [updateProfile, updating, errorU] = useUpdateProfile(auth);
 
     // user get 
-    const [token] = useToken( user || guser )
+    const [token] = useToken( user || guser || createUser )
 
     // error
     let erroElement;
@@ -43,9 +43,9 @@ const SignUp = () => {
     }
 
     //   user 
-    if (user || guser) {
+    if (token) {
         // console.log(user || guser);
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true });
     }
 
     const handleSignUp = async (e) => {

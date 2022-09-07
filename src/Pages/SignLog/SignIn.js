@@ -1,12 +1,14 @@
 import React from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import auth from '../../firebase.init';
+import useToken from '../../hooks/useToken';
 import Footer from '../Shared/Footer';
 import Loading from '../Shared/Loading';
 import SocialLog from './SocialLog';
 
 const SignIn = () => {
+    const [user ,userLoading] = useAuthState(auth);
     let navigate = useNavigate();
     let location = useLocation();
     let from = location.state?.from?.pathname || "/";
@@ -14,7 +16,7 @@ const SignIn = () => {
     // email and password 
     const [
         signInWithEmailAndPassword,
-        user,
+        createUser,
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
@@ -29,6 +31,8 @@ const SignIn = () => {
         signInWithEmailAndPassword(name, password);
     }
 
+    const [token]=useToken(user || guser || createUser)
+
     // error
     let erroElement;
     if (error || gerror) {
@@ -36,13 +40,13 @@ const SignIn = () => {
     }
 
     //   loading 
-    if (loading || gloading) {
+    if (loading || gloading || userLoading) {
         return <Loading></Loading>;
     }
 
     //   user 
-    if (user || guser) {
-        navigate(from, { replace: true });
+    if (token) {
+        // navigate(from, { replace: true });
     }
 
     return (
