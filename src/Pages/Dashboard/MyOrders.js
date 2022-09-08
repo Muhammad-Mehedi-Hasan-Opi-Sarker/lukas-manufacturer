@@ -92,7 +92,7 @@ const MyOrders = () => {
                                     <button onClick={() => handleDelete(order._id)} className="btn btn-ghost btn-xs text-2xl"><AiFillDelete></AiFillDelete></button>
                                 </td>
                                 <td>
-                                    {(order.count && !order.paid) && <Link to={``}><button className="btn btn-ghost bg-primary btn-xs">pay</button></Link>}
+                                    {(order.count && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className="btn btn-ghost bg-primary btn-xs">pay</button></Link>}
                                     {(order.count && !order.paid) && <Link to={``}><button className="btn btn-ghost bg-primary btn-xs">paid</button></Link>}
                                 </td>
                             </tr>)

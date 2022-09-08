@@ -36,11 +36,7 @@ function App() {
             <Shop></Shop>
           </RequiredAuth>
         }></Route>
-        <Route path='/payment/:id' element={
-          <RequiredAuth>
-            <Payment></Payment>
-          </RequiredAuth>
-        }></Route>
+      
         <Route path='/dashboard' element={
           <RequiredAuth>
             <Dhashboard></Dhashboard>
@@ -52,6 +48,7 @@ function App() {
           <Route path='review' element={<Reviews></Reviews>}></Route>
           <Route path='allOrder' element={<AllOrders></AllOrders>}></Route>
           <Route path='users' element={<Users></Users>}></Route>
+          <Route path='payment/:id' element={<Payment></Payment>}></Route>
         </Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
         <Route path='/signin' element={<SignIn></SignIn>}></Route>
