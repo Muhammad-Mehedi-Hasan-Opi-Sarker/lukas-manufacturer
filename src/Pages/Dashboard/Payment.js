@@ -16,12 +16,11 @@ const Payment = () => {
     }, [])
     return (
         <div className='grid justify-items-center'>
-            <h1 className='font-bold text-purple-600'> {id}</h1>
-            <div className="card w-96 bg-base-100 shadow-xl">
+            <div className="card w-96 bg-base-100 shadow-xl rounded-none mt-8">
                 <div className="card-body">
                     
                     <Elements stripe={stripePromise}>
-                        <CheckoutForm></CheckoutForm>
+                        <CheckoutForm id={id}></CheckoutForm>
                     </Elements>
                 </div>
             </div>

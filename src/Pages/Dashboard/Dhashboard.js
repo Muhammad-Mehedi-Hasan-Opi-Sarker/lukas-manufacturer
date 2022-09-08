@@ -32,7 +32,6 @@ const Dhashboard = () => {
                             <li><Link to='/dashboard/order'><span className='text-xl'><MdBookmarkBorder></MdBookmarkBorder></span> Orders</Link></li>
                             <li><Link to='/dashboard/review'><span className='text-xl'><MdPreview></MdPreview></span> Review</Link></li>
                             {admin && <li><Link to='/dashboard/users'><span><AiOutlineUsergroupAdd></AiOutlineUsergroupAdd></span> All Users List</Link></li>}
-                            <li><Link to='/dashboard/allOrder'><span><FaListAlt></FaListAlt></span> All Order List</Link></li>
                             <li><Link to='/dashboard/order'><span className='text-xl'><HiOutlineViewList></HiOutlineViewList></span> Admin Role</Link></li>
                         </ul>
                     </div>

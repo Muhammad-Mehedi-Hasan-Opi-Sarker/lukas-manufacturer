@@ -18,14 +18,14 @@ const MyOrders = () => {
             }
         })
             .then(res => {
-                console.log('res',res);
-                if(res.status === 401 || res.status === 403){
+                console.log('res', res);
+                if (res.status === 401 || res.status === 403) {
                     signOut(auth);
                     localStorage.removeItem('accessToken');
                     navigate('/')
                 }
                 return res.json()
-                
+
             })
             .then(data => {
                 setOrders(data)
@@ -93,7 +93,7 @@ const MyOrders = () => {
                                 </td>
                                 <td>
                                     {(order.count && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className="btn btn-ghost bg-primary btn-xs">pay</button></Link>}
-                                    {(order.count && !order.paid) && <Link to={``}><button className="btn btn-ghost bg-primary btn-xs">paid</button></Link>}
+                                    {/* {(order.count && !order.paid) && <Link to={``}><button className="btn btn-ghost bg-primary btn-xs">paid</button></Link>} */}
                                 </td>
                             </tr>)
                         }
