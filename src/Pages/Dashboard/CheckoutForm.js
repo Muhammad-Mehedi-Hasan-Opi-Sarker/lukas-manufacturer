@@ -14,7 +14,7 @@ const CheckoutForm = ({ id }) => {
     const prices = 265;
     const price = { price: prices }
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
+        fetch('https://ancient-cove-16092.herokuapp.com/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -80,7 +80,7 @@ const CheckoutForm = ({ id }) => {
                 orderId:id,
                 transcationId:paymentIntent.id
             }
-            fetch(`http://localhost:5000/order/${id}`, {
+            fetch(`https://ancient-cove-16092.herokuapp.com/order/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json',

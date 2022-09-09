@@ -10,7 +10,7 @@ const Users = () => {
     const [reload, setReload] = useState(false);
     const [user, loading] = useAuthState(auth);
     useEffect(() => {
-        fetch('http://localhost:5000/users', {
+        fetch('https://ancient-cove-16092.herokuapp.com/users', {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -27,7 +27,7 @@ const Users = () => {
     // makeadmin 
     const makeAdmin = (email) => {
         setReload(true);
-        fetch(`http://localhost:5000/user/admin/${email}`,{
+        fetch(`https://ancient-cove-16092.herokuapp.com/user/admin/${email}`,{
             method: 'PUT',
             headers:{
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -50,7 +50,7 @@ const Users = () => {
     const userDelete = id => {
         const procced = window.confirm('Delete your coustomer');
         if (procced) {
-            const url = `http://localhost:5000/users/${id}`;
+            const url = `https://ancient-cove-16092.herokuapp.com/users/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })
@@ -83,7 +83,7 @@ const Users = () => {
                         {/* <!-- row 1 --> */}
 
                         {
-                            users.map(order => <tr>
+                            users?.map(order => <tr>
                                 <td>
                                     <div className="flex items-center space-x-3">
                                         <div>

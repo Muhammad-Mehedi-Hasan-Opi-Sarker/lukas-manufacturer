@@ -11,7 +11,7 @@ const Inventory = () => {
     const [user, loading, error] = useAuthState(auth);
     const [product, setProduct] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/product/${id}`)
+        fetch(`https://ancient-cove-16092.herokuapp.com/product/${id}`)
             .then(res => res.json()).then(data => setProduct(data))
     }, [])
 
@@ -36,7 +36,7 @@ const Inventory = () => {
             date: date
         };
         console.log(data)
-        fetch(`http://localhost:5000/order/${id}`, {
+        fetch(`https://ancient-cove-16092.herokuapp.com/order/${id}`, {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',

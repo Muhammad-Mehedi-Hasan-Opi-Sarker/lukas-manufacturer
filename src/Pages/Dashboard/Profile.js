@@ -16,7 +16,7 @@ const Profile = () => {
     const [profile, setProfile] = useState([])
     const [reload,setReload] = useState(false);
     useEffect(() => {
-        const url = `http://localhost:5000/profile?email=${user.email}`;
+        const url = `https://ancient-cove-16092.herokuapp.com/profile?email=${user.email}`;
         fetch(url).then(res => res.json()).then(data => setProfile(data))
     }, [reload])
 

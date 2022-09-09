@@ -20,6 +20,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import AllOrders from './Pages/Dashboard/AllOrders';
 import Users from './Pages/Dashboard/Users';
 import Payment from './Pages/Dashboard/Payment';
+import CoustomerReviews from './Pages/Dashboard/CoustomerReviews';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path='/homeInventory/:id' element={<HomeInventory></HomeInventory>}></Route>
         <Route path='/inventory/:id' element={<Inventory></Inventory>}></Route>
         <Route path='/about' element={<About></About>}></Route>
+        <Route path='/reviews' element={<CoustomerReviews></CoustomerReviews>}></Route>
         <Route path='/shop' element={
           <RequiredAuth>
             <Shop></Shop>

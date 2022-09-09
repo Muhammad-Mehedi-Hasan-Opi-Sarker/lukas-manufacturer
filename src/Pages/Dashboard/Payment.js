@@ -11,7 +11,7 @@ const Payment = () => {
     const { id } = useParams()
     const [oder, setorder] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/order/${id}`)
+        fetch(`https://ancient-cove-16092.herokuapp.com/order/${id}`)
             .then(res => res.json()).then(data => setorder(data))
     }, [])
     return (

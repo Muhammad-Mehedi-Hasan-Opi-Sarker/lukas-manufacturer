@@ -18,7 +18,7 @@ const Reviews = () => {
             rating: rating
         }
 
-        fetch(`http://localhost:5000/reviews/${id}`, {
+        fetch(`https://ancient-cove-16092.herokuapp.com/reviews/${id}`, {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',

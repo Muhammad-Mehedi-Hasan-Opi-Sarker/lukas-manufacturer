@@ -11,7 +11,7 @@ const MyOrders = () => {
     const [reload, setReload] = useState(false);
     const [orders, setOrders] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/order?email=${user.email}`, {
+        fetch(`https://ancient-cove-16092.herokuapp.com/order?email=${user.email}`, {
             method: 'GET',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -37,7 +37,7 @@ const MyOrders = () => {
         console.log(id)
         const procced = window.confirm('Confirm Now');
         if (procced) {
-            const url = `http://localhost:5000/order/${id}`;
+            const url = `https://ancient-cove-16092.herokuapp.com/order/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

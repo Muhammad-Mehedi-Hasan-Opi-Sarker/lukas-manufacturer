@@ -31,7 +31,7 @@ const SignIn = () => {
         signInWithEmailAndPassword(name, password);
     }
 
-    const [token]=useToken(user || guser || createUser)
+    const [token]=useToken(user )
 
     // error
     let erroElement;
@@ -70,11 +70,12 @@ const SignIn = () => {
                             <input name='password' type="password" placeholder="Password" className="input input-bordered w-full mb-5" />
                             {erroElement}
                             <input className='btn btn-neutral w-full' type="submit" value="LOGIN" />
-                            <p>No Account <span className='mb-5 text-secondary'><Link to='/signup'>Register Please</Link></span></p>
-                            <input onClick={() => signInWithGoogle()} className='btn btn-neutral w-full' type="submit" value="Sign In With Google" />
-                            <p className='lg:mb-12'></p>
+                            
                         </div>
                     </form>
+                    <p>No Account <span className='mb-5 text-secondary'><Link to='/signup'>Register Please</Link></span></p>
+                            <input onClick={() => signInWithGoogle()} className='btn btn-neutral w-full' type="submit" value="Sign In With Google" />
+                            <p className='lg:mb-12'></p>
                 </div>
             </div>
             <Footer></Footer>

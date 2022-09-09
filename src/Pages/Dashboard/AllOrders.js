@@ -6,14 +6,14 @@ const AllOrders = () => {
     const [orders, setOrders] = useState([]);
     const [reload, setReload]=useState(false);
     useEffect(() => {
-        fetch('http://localhost:5000/order')
+        fetch('https://ancient-cove-16092.herokuapp.com/order')
             .then(res => res.json()).then(data => setOrders(data));
     }, [reload])
     // delete 
     const handleDelete = id => {
         const procced = window.confirm('Confirm Now');
         if (procced) {
-            const url = `http://localhost:5000/order/${id}`;
+            const url = `https://ancient-cove-16092.herokuapp.com/order/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })
