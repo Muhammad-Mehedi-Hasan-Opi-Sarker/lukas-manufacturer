@@ -43,7 +43,7 @@ const Headers = () => {
                 </div>
                 <div className="navbar-end">
                     <ul className='text-xl'>
-                        <li>{user ? <p onClick={logout} className='font-xl'><span className='dropdown-content mt-3 ml-16 p-2 shadow bg-base-100 rounded-box w-52'>{user?.displayName}</span></p> : <Link to='/signin' >Login</Link>}</li>
+                        <li>{user ? <p onClick={logout} className='font-xl'><span className='dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52'>{user?.displayName}</span></p> : <Link to='/signin' >Login</Link>}</li>
                     </ul>
                 </div>
                 <div className='navbar-end'>
