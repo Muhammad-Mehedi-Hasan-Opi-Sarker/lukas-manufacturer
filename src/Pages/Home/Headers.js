@@ -18,7 +18,7 @@ const Headers = () => {
         <li><Link to='/home' >Home</Link></li>
         <li><Link to='/about' >About</Link></li>
         <li><Link to='/shop' >Shop</Link></li>
-        <li><Link to='/home' >Blog</Link></li>
+        <li><Link to='/blog' >Blog</Link></li>
         <li><Link to='/reviews' >Coustomers Reviews</Link></li>
         {user && <li><Link to='/dashboard' >Dhashboard</Link></li>}
     </>
@@ -43,7 +43,7 @@ const Headers = () => {
                 </div>
                 <div className="navbar-end">
                     <ul className='text-xl'>
-                        <li>{user ? <p onClick={logout} className='font-xl'><span className='dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52'>{user?.displayName}</span></p> : <Link to='/signin' >Login</Link>}</li>
+                        <li>{user ? <p onClick={logout} className='font-xl'><span className='dropdown-content mt-3 ml-16 p-2 shadow bg-base-100 rounded-box w-52'>{user?.displayName}</span></p> : <Link to='/signin' >Login</Link>}</li>
                     </ul>
                 </div>
                 <div className='navbar-end'>

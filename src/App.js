@@ -21,6 +21,7 @@ import AllOrders from './Pages/Dashboard/AllOrders';
 import Users from './Pages/Dashboard/Users';
 import Payment from './Pages/Dashboard/Payment';
 import CoustomerReviews from './Pages/Dashboard/CoustomerReviews';
+import Blog from './Pages/Blog';
 
 function App() {
   return (
@@ -29,8 +30,17 @@ function App() {
       <Routes>
         <Route path='/home' element={<Home></Home>}></Route>
         <Route path='/' element={<Home></Home>}></Route>
-        <Route path='/homeInventory/:id' element={<HomeInventory></HomeInventory>}></Route>
-        <Route path='/inventory/:id' element={<Inventory></Inventory>}></Route>
+        <Route path='blog' element={<Blog></Blog>}></Route>
+        <Route path='/homeInventory/:id' element={
+          <RequiredAuth>
+            <HomeInventory></HomeInventory>
+          </RequiredAuth>
+        }></Route>
+        <Route path='/inventory/:id' element={
+        <RequiredAuth>
+          <Inventory></Inventory>
+        </RequiredAuth>
+        }></Route>
         <Route path='/about' element={<About></About>}></Route>
         <Route path='/reviews' element={<CoustomerReviews></CoustomerReviews>}></Route>
         <Route path='/shop' element={

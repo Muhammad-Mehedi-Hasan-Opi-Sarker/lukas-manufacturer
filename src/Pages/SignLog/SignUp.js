@@ -29,7 +29,7 @@ const SignUp = () => {
     const [updateProfile, updating, errorU] = useUpdateProfile(auth);
 
     // user get 
-    const [token] = useToken( user )
+    const [token] = useToken( user || guser ||createUser )
 
     // error
     let erroElement;
@@ -81,13 +81,11 @@ const SignUp = () => {
                             <input name='password' type="password" placeholder="Password" className="input input-bordered w-full mb-5" />
                             {erroElement}
                             <input className='btn btn-neutral w-full' type="submit" value="LOGIN" />
-                           
-                        </div>
-                    </form>
-
-                    <p>Have Account? <span className='mb-5 text-secondary'><Link to='/signin'>Login Please</Link></span></p>
+                            <p>Have Account? <span className='mb-5 text-secondary'><Link to='/signin'>Login Please</Link></span></p>
                             <input onClick={() => signInWithGoogle()} className='btn btn-neutral w-full' type="submit" value="Sign In With Google" />
                             <p className='lg:mb-12'></p>
+                        </div>
+                    </form>
 
                 </div>
             </div>

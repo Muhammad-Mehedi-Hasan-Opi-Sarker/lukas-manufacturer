@@ -12,7 +12,7 @@ const HomeInventory = () => {
     const { id } = useParams();
     const [product, setProduct] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/homeProduct/${id}`)
+        fetch(`https://ancient-cove-16092.herokuapp.com/homeProduct/${id}`)
             .then(res => res.json()).then(data => setProduct(data))
     }, [])
 
@@ -38,7 +38,7 @@ const HomeInventory = () => {
             date: date
         };
         console.log(data)
-        fetch(`http://localhost:5000/order/${id}`, {
+        fetch(`https://ancient-cove-16092.herokuapp.com/order/${id}`, {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',

@@ -36,7 +36,7 @@ const Profile = () => {
             link: link
         };
         // put method 
-        const url = `http://localhost:5000/profile/${email}`
+        const url = `https://ancient-cove-16092.herokuapp.com/profile/${email}`
         console.log(url)
         fetch(url, {
             method: 'PUT', // or 'PUT'
