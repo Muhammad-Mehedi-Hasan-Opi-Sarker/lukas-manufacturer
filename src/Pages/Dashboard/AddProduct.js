@@ -12,7 +12,7 @@ const AddProduct = () => {
             img:img,
             price:price
         };
-        fetch(`http://localhost:5000/product`, {
+        fetch(`https://ancient-cove-16092.herokuapp.com/product`, {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',

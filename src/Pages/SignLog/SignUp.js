@@ -66,7 +66,7 @@ const SignUp = () => {
                     <div className="lg:h-64 h-48 bg-center text-base-100 
             grid justify-items-center items-center
             bg-[url('https://htmldemo.net/lukas/lukas/assets/img/bg/page-header-bg.jpg')]">
-                        <div><h1 className='font-bold text-4xl'>Register</h1>
+                        <div><h1 className='font-bold text-4xl mb-3'>Register</h1>
                             <h1 className='font-bold text-xl'>
                                 <Link to='/home'><span>Home</span></Link>
                                 <span className='text-secondary'> SignIn</span></h1></div>
