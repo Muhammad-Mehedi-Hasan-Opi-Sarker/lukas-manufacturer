@@ -76,9 +76,9 @@ const SignUp = () => {
                 <div className="card w-full bg-base-100 lg:px-96 gird justify-items-center">
                     <form onSubmit={handleSignUp}>
                         <div className="card-body border shadow">
-                            <input name='name' type="name" placeholder="User Name" className="input input-bordered w-full mb-3 lg:mt-12 mt-5" />
-                            <input name='email' type="email" placeholder="Email" className="input input-bordered w-full mb-5" />
-                            <input name='password' type="password" placeholder="Password" className="input input-bordered w-full mb-5" />
+                            <input name='name' type="name" required placeholder="User Name" className="input input-bordered w-full mb-3 lg:mt-12 mt-5" />
+                            <input name='email' type="email" required placeholder="Email" className="input input-bordered w-full mb-5" />
+                            <input name='password' type="password" required placeholder="Password" className="input input-bordered w-full mb-5" />
                             {erroElement}
                             <input className='btn btn-neutral w-full' type="submit" value="LOGIN" />
                             <p>Have Account? <span className='mb-5 text-secondary'><Link to='/signin'>Login Please</Link></span></p>

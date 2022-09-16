@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Banner.css';
 
 const Banner = () => {
@@ -14,7 +15,7 @@ const Banner = () => {
                             <h1 className='lg:font-bold mb-2  lg:text-5xl text-white'>LATEST &</h1>
                             <h1 className='lg:font-bold mb-2  lg:text-5xl text-white'>POWERFUL ENGINE</h1>
                             <h1 className='lg:font-bold mb-2 lg:text-5xl text-white'>FOR YOU</h1>
-                            <button className='btn btn-outline bg-gray-200 text-neutral rounded-3xl'>SHOP NOW</button>
+                            <button className='btn btn-outline bg-gray-200 text-neutral rounded-3xl'><Link to='/shop'>SHOP NOW</Link></button>
                         </div>
                         <a href="#slide2" className="btn btn-circle">❯</a>
                     </div>
@@ -27,7 +28,7 @@ const Banner = () => {
                             <h1 className='lg:text-5xl  mb-2 lg:text-white'>NEW TECHNOLOGY & BUILD</h1>
                             <h1 className='lg:font-bold mb-2  lg:text-5xl text-white'>WHEELS & TIRES</h1>
                             <h1 className='lg:font-bold mb-2  lg:text-5xl text-white'>COLLECTIONS</h1>
-                            <button className='btn btn-outline bg-gray-200 text-neutral rounded-3xl'>SHOP NOW</button>
+                            <button className='btn btn-outline bg-gray-200 text-neutral rounded-3xl'><Link to='/shop'>SHOP NOW</Link></button>
                         </div>
                         <a href="#slide3" className="btn btn-circle">❯</a>
                     </div>

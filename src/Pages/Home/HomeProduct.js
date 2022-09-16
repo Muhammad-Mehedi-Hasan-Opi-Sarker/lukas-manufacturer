@@ -29,10 +29,10 @@ const HomeProduct = () => {
             <div className='mb-12 grid lg:grid-cols-5 md:grid-cols-3 justify-items-center gap-8 lg:mt-22 mt-16 lg:px-24 px-4'>
                 {
                     hProducts.map(product => <div onClick={()=>handleGo(product._id)} className="card w-full rounded-none bg-primary shadow-xl">
-                        <figure><img src={product.img} alt="Shoes" /></figure>
+                        <figure><img className='hover:rotate-3' src={product.img} alt="Shoes" /></figure>
                         {/* rating */}
 
-                        <div className="card-body">
+                        <div className="card-body hover:rotate-1">
                             {/* rating */}
                             <div className="rating rating-sm">
                                 <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
