@@ -22,6 +22,7 @@ import Users from './Pages/Dashboard/Users';
 import Payment from './Pages/Dashboard/Payment';
 import CoustomerReviews from './Pages/Dashboard/CoustomerReviews';
 import Blog from './Pages/Blog';
+import AddProduct from './Pages/Dashboard/AddProduct';
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
           <Route path='review' element={<Reviews></Reviews>}></Route>
           <Route path='allOrder' element={<AllOrders></AllOrders>}></Route>
           <Route path='users' element={<Users></Users>}></Route>
+          <Route path='addProduct' element={<AddProduct></AddProduct>}></Route>
           <Route path='payment/:id' element={<Payment></Payment>}></Route>
         </Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>

@@ -93,7 +93,7 @@ const MyOrders = () => {
                                 </td>
                                 <td>
                                     {(order.count && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className="btn btn-ghost bg-primary btn-xs">pay</button></Link>}
-                                    {/* {(order.count && !order.paid) && <Link to={``}><button className="btn btn-ghost bg-primary btn-xs">paid</button></Link>} */}
+                                    {(order.count && order.paid) && <Link to={``}><button className="btn btn-ghost bg-primary btn-xs">paid</button></Link>}
                                 </td>
                             </tr>)
                         }

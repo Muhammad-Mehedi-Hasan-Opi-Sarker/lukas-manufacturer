@@ -35,7 +35,6 @@ const Inventory = () => {
             img: product.img,
             date: date
         };
-        console.log(data)
         fetch(`https://ancient-cove-16092.herokuapp.com/order/${id}`, {
             method: 'POST', // or 'PUT'
             headers: {
